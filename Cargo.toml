@@ -1,0 +1,30 @@
+[package]
+name = "paz"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "paz-client"
+path = "src/bin/client.rs"
+
+[[bin]]
+name = "paz-server"
+path = "src/bin/server.rs"
+
+[dependencies]
+clap = { version = "4.4.8", default-features = false, features = [
+    "color",
+    "derive",
+    "env",
+    "error-context",
+    "help",
+    "std",
+    "suggestions",
+    "usage",
+] }
+color-eyre = { version = "0.6.2", default-features = false }
+thiserror = { version = "1.0.51", default-features = false }
+tokio = { version = "1.35.0", default-features = false, features = [
+    "macros",
+    "rt-multi-thread",
+] }
