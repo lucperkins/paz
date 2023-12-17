@@ -49,6 +49,14 @@
 
             # Nix
             nixpkgs-fmt
+
+            # Kubernetes
+            kubectl
+            kubectx
+            minikube
+
+            # Local dev
+            process-compose
           ]
           ++ (pkgs.lib.optional pkgs.stdenv.isDarwin (with pkgs; [ libiconv ]
             ++ (with darwin.apple_sdk.frameworks; [ SystemConfiguration ])));

@@ -1,0 +1,14 @@
+version: "0.69.0"
+log_level: "debug"
+
+processes:
+  Kubernetes:
+    command: minikube start --kubernetes-version=v1.27.4
+    is_daemon: true
+    liveness_probe:
+      exec:
+        command: minikube status
+      initial_delay_seconds: 5
+      period_seconds: 60
+    shutdown:
+      command: minikube stop
