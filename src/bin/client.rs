@@ -1,14 +1,34 @@
 use std::process::ExitCode;
 
-use clap::Parser;
+use clap::{Parser, Subcommand};
 use paz::Result;
 
+#[derive(Debug, Subcommand)]
+enum Command {
+    /// Deploy a Paz application.
+    Deploy,
+}
+
 #[derive(Debug, Parser)]
-struct Cli {}
+struct Cli {
+    #[clap(subcommand)]
+    command: Command,
+}
 
 impl Cli {
     async fn execute(&self) -> Result<ExitCode> {
-        Ok(ExitCode::SUCCESS)
+        use Command::*;
+
+        match self.command {
+            Deploy => {
+                reqwest::Client::new()
+                    .post("http://0.0.0.0:8080/deploy")
+                    .send()
+                    .await?;
+
+                Ok(ExitCode::SUCCESS)
+            }
+        }
     }
 }
 

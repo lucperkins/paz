@@ -49,7 +49,9 @@
 
             # Nix
             nixpkgs-fmt
-          ] ++ (pkgs.lib.optional pkgs.stdenv.isDarwin (with pkgs; [ libiconv ]));
+          ]
+          ++ (pkgs.lib.optional pkgs.stdenv.isDarwin (with pkgs; [ libiconv ]
+            ++ (with darwin.apple_sdk.frameworks; [ SystemConfiguration ])));
 
           env = {
             RUST_SRC_PATH = "${pkgs.rustToolchain}/lib/rustlib/src/rust/library";
